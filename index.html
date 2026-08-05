@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="Convite especial para um encontro na casa de Raul e Milena." />
+  <title>Convite Especial — Casa de Raul e Milena</title>
+
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg-soft:#0b1828;
+      --card:rgba(255,255,255,.08);
+      --card-strong:rgba(255,255,255,.12);
+      --line:rgba(255,255,255,.14);
+      --text:#f8fafc;
+      --muted:#aebbd0;
+      --gold:#f4c96b;
+      --gold-2:#dba940;
+      --green:#4ee08a;
+      --green-dark:#1f9f5a;
+      --red:#ff6b76;
+      --red-dark:#d64352;
+      --blue:#66a8ff;
+      --shadow:0 30px 100px rgba(0,0,0,.45);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(102,168,255,.24), transparent 28%),
+        radial-gradient(circle at 84% 15%, rgba(244,201,107,.14), transparent 25%),
+        radial-gradient(circle at 50% 92%, rgba(78,224,138,.12), transparent 30%),
+        linear-gradient(155deg, #06101d 0%, #091726 45%, #07111f 100%);
+      overflow-x:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.75), transparent 92%);
+      pointer-events:none;
+    }
+
+    .ambient{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(12px);
+      opacity:.35;
+      animation:drift 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one{
+      width:220px;
+      height:220px;
+      background:#326fc4;
+      left:-80px;
+      top:10%;
+    }
+
+    .orb.two{
+      width:180px;
+      height:180px;
+      background:#b58a37;
+      right:-70px;
+      top:18%;
+      animation-delay:-4s;
+    }
+
+    .orb.three{
+      width:260px;
+      height:260px;
+      background:#1c7d54;
+      left:30%;
+      bottom:-140px;
+      animation-delay:-7s;
+    }
+
+    @keyframes drift{
+      from{ transform:translate3d(0,0,0) scale(1); }
+      to{ transform:translate3d(25px,-18px,0) scale(1.1); }
+    }
+
+    .shell{
+      width:min(100%, 640px);
+      position:relative;
+      z-index:2;
+    }
+
+    .panel{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.095), rgba(255,255,255,.055));
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      box-shadow:var(--shadow);
+      padding:18px;
+      animation:panelIn .9s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(255,255,255,.35), transparent 35%, rgba(244,201,107,.2));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+    }
+
+    @keyframes panelIn{
+      from{
+        opacity:0;
+        transform:translateY(28px) scale(.975);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    .hero{
+      min-height:650px;
+      border-radius:26px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(244,201,107,.16), transparent 30%),
+        linear-gradient(160deg, rgba(9,25,42,.92), rgba(6,16,29,.92));
+      padding:34px 28px 28px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:320px;
+      height:320px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:50%;
+      right:-180px;
+      top:120px;
+      box-shadow:
+        0 0 0 40px rgba(255,255,255,.025),
+        0 0 0 80px rgba(255,255,255,.018);
+      pointer-events:none;
+    }
+
+    .topline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:28px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-size:13px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      font-weight:800;
+      color:#d7e0ee;
+    }
+
+    .brand-mark{
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(145deg, rgba(244,201,107,.2), rgba(255,255,255,.06));
+      border:1px solid rgba(244,201,107,.25);
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#dbe7f6;
+      font-size:12px;
+      font-weight:700;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .status-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 6px rgba(78,224,138,.12);
+      animation:pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(.72); opacity:.65; }
+    }
+
+    .intro,
+    .loading-view,
+    .result-view{
+      position:relative;
+      z-index:2;
+    }
+
+    .kicker{
+      color:var(--gold);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:2.2px;
+      text-transform:uppercase;
+      margin-bottom:13px;
+    }
+
+    h1{
+      font-size:clamp(38px, 8vw, 64px);
+      line-height:.98;
+      letter-spacing:-2.6px;
+      margin-bottom:18px;
+      max-width:510px;
+    }
+
+    h1 span{
+      display:block;
+      color:#dfe9f6;
+      font-weight:500;
+      font-size:.66em;
+      line-height:1.18;
+      letter-spacing:-1.2px;
+      margin-top:10px;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.65;
+      max-width:510px;
+      margin-bottom:24px;
+    }
+
+    .event-card{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:26px;
+    }
+
+    .event-item{
+      min-height:100px;
+      border-radius:18px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.09);
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:transform .25s ease, background .25s ease;
+    }
+
+    .event-item:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.075);
+    }
+
+    .event-icon{
+      font-size:22px;
+    }
+
+    .event-label{
+      color:#8191a8;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      font-weight:800;
+    }
+
+    .event-value{
+      margin-top:4px;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.25;
+    }
+
+    .vote-box{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.045));
+      border:1px solid rgba(255,255,255,.11);
+      padding:19px;
+    }
+
+    .vote-label{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:15px;
+    }
+
+    .vote-title{
+      font-size:17px;
+      font-weight:850;
+    }
+
+    .vote-secure{
+      color:#7f8da2;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    button{
+      position:relative;
+      overflow:hidden;
+      border:none;
+      border-radius:17px;
+      padding:17px 16px;
+      font-size:15px;
+      font-weight:900;
+      cursor:pointer;
+      color:white;
+      transition:transform .2s ease, filter .2s ease, box-shadow .2s ease;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+
+    button::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.24), transparent 80%);
+      transform:translateX(-120%);
+      transition:transform .55s ease;
+    }
+
+    button:hover::after{
+      transform:translateX(120%);
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.06);
+    }
+
+    button:active{
+      transform:scale(.985);
+    }
+
+    .btn-yes{
+      background:linear-gradient(135deg, var(--green), var(--green-dark));
+      box-shadow:0 16px 34px rgba(35,166,94,.25);
+    }
+
+    .btn-no{
+      background:linear-gradient(135deg, var(--red), var(--red-dark));
+      box-shadow:0 16px 34px rgba(214,67,82,.2);
+    }
+
+    .privacy-note{
+      margin-top:12px;
+      text-align:center;
+      color:#718096;
+      font-size:11px;
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    .loading-view,
+    .result-view{
+      display:none;
+      min-height:540px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      flex-direction:column;
+    }
+
+    .loading-view.active,
+    .result-view.active{
+      display:flex;
+      animation:viewIn .48s ease both;
+    }
+
+    @keyframes viewIn{
+      from{ opacity:0; transform:translateY(12px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .loader-shell{
+      width:126px;
+      height:126px;
+      position:relative;
+      display:grid;
+      place-items:center;
+      margin-bottom:30px;
+    }
+
+    .loader-ring{
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      border:2px solid rgba(255,255,255,.08);
+      border-top-color:var(--gold);
+      border-right-color:var(--blue);
+      animation:spin 1.25s linear infinite;
+    }
+
+    .loader-ring.two{
+      inset:13px;
+      border-top-color:var(--green);
+      border-right-color:transparent;
+      animation-duration:.9s;
+      animation-direction:reverse;
+    }
+
+    .loader-core{
+      width:72px;
+      height:72px;
+      border-radius:22px;
+      display:grid;
+      place-items:center;
+      font-size:30px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    @keyframes spin{
+      to{ transform:rotate(360deg); }
+    }
+
+    .loading-view h2,
+    .result-view h2{
+      font-size:30px;
+      margin-bottom:10px;
+      letter-spacing:-.8px;
+    }
+
+    .loading-copy{
+      color:var(--muted);
+      font-size:15px;
+      min-height:24px;
+      margin-bottom:22px;
+    }
+
+    .progress-shell{
+      width:min(100%, 390px);
+    }
+
+    .progress-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:#8290a5;
+      font-size:11px;
+      font-weight:800;
+      margin-bottom:8px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .progress-track{
+      height:10px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .progress-bar{
+      width:0%;
+      height:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg, var(--blue), var(--green), var(--gold));
+      box-shadow:0 0 18px rgba(78,224,138,.28);
+      transition:width .55s ease;
+    }
+
+    .result-badge{
+      width:102px;
+      height:102px;
+      border-radius:30px;
+      display:grid;
+      place-items:center;
+      font-size:48px;
+      background:linear-gradient(145deg, #43dd85, #1f9f5a);
+      box-shadow:
+        0 18px 50px rgba(31,159,90,.3),
+        0 0 0 12px rgba(78,224,138,.08);
+      margin-bottom:25px;
+      animation:successPop .65s cubic-bezier(.2,1.5,.4,1) both;
+    }
+
+    @keyframes successPop{
+      from{ opacity:0; transform:scale(.35) rotate(-12deg); }
+      to{ opacity:1; transform:scale(1) rotate(0); }
+    }
+
+    .result-text{
+      color:var(--muted);
+      max-width:460px;
+      line-height:1.65;
+      margin-bottom:18px;
+    }
+
+    .receipt{
+      width:min(100%, 460px);
+      text-align:left;
+      background:rgba(255,255,255,.065);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:22px;
+      padding:18px;
+      margin-top:6px;
+    }
+
+    .receipt-row{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      padding:11px 0;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      color:#cbd6e5;
+      font-size:14px;
+    }
+
+    .receipt-row:last-child{
+      border-bottom:none;
+    }
+
+    .receipt-row span:last-child{
+      text-align:right;
+      color:white;
+      font-weight:800;
+    }
+
+    .receipt-highlight{
+      margin-top:16px;
+      background:linear-gradient(135deg, rgba(244,201,107,.12), rgba(255,255,255,.04));
+      border:1px solid rgba(244,201,107,.2);
+      border-radius:16px;
+      padding:16px;
+      line-height:1.55;
+      color:#f7edd0;
+    }
+
+    .receipt-highlight strong{
+      color:#ffe39d;
+    }
+
+    .joke{
+      margin-top:16px;
+      color:#78879d;
+      font-size:12px;
+    }
+
+    .confetti{
+      position:fixed;
+      top:-30px;
+      z-index:20;
+      pointer-events:none;
+      animation:fall linear forwards;
+      border-radius:3px;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translate3d(var(--drift), 115vh, 0) rotate(820deg);
+        opacity:.95;
+      }
+    }
+
+    @media (max-width:620px){
+      body{
+        padding:10px;
+        align-items:flex-start;
+      }
+
+      .panel{
+        padding:9px;
+        border-radius:27px;
+      }
+
+      .hero{
+        min-height:calc(100vh - 20px);
+        border-radius:21px;
+        padding:25px 18px 22px;
+      }
+
+      .topline{
+        margin-bottom:24px;
+      }
+
+      h1{
+        font-size:43px;
+        letter-spacing:-2px;
+      }
+
+      .lead{
+        font-size:15px;
+      }
+
+      .event-card{
+        grid-template-columns:1fr;
+      }
+
+      .event-item{
+        min-height:auto;
+        flex-direction:row;
+        align-items:center;
+        gap:12px;
+      }
+
+      .event-item > div:last-child{
+        flex:1;
+      }
+
+      .actions{
+        grid-template-columns:1fr;
+      }
+
+      button{
+        min-height:56px;
+      }
+
+      .loading-view,
+      .result-view{
+        min-height:calc(100vh - 95px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <main class="shell">
+    <section class="panel">
+      <div class="hero">
+        <div class="topline">
+          <div class="brand">
+            <div class="brand-mark">RM</div>
+            Raul & Milena
+          </div>
+          <div class="status">
+            <span class="status-dot"></span>
+            Convite ativo
+          </div>
+        </div>
+
+        <section class="intro" id="intro">
+          <div class="kicker">Convite especial</div>
+
+          <h1>
+            Evento em casa
+            <span>um encontro leve entre amigos</span>
+          </h1>
+
+          <p class="lead">
+            Preparamos um encontro para este sábado e gostaríamos muito de contar com a sua presença.
+            Faça sua escolha abaixo para registrar sua resposta.
+          </p>
+
+          <div class="event-card">
+            <div class="event-item">
+              <div class="event-icon">📅</div>
+              <div>
+                <div class="event-label">Data</div>
+                <div class="event-value">Sábado, 8 de agosto</div>
+              </div>
+            </div>
+
+            <div class="event-item">
+              <div class="event-icon">🏠</div>
+              <div>
+                <div class="event-label">Local</div>
+                <div class="event-value">Casa de Raul e Milena</div>
+              </div>
+            </div>
+
+            <div class="event-item">
+              <div class="event-icon">✨</div>
+              <div>
+                <div class="event-label">Clima</div>
+                <div class="event-value">Encontro entre amigos</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vote-box">
+            <div class="vote-label">
+              <div class="vote-title">Você confirma sua presença?</div>
+              <div class="vote-secure">resposta segura</div>
+            </div>
+
+            <div class="actions">
+              <button class="btn-yes" id="btnYes" type="button">
+                ✓ Sim, eu vou
+              </button>
+
+              <button class="btn-no" id="btnNo" type="button">
+                ✕ Não vou conseguir
+              </button>
+            </div>
+
+            <div class="privacy-note">
+              Sua resposta será enviada automaticamente aos organizadores da casa.
+            </div>
+          </div>
+        </section>
+
+        <section class="loading-view" id="loadingView">
+          <div class="loader-shell">
+            <div class="loader-ring"></div>
+            <div class="loader-ring two"></div>
+            <div class="loader-core">📨</div>
+          </div>
+
+          <h2>Processando resposta</h2>
+          <p class="loading-copy" id="loadingCopy">Validando sua escolha...</p>
+
+          <div class="progress-shell">
+            <div class="progress-top">
+              <span id="progressLabel">Iniciando</span>
+              <span id="progressNumber">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="result-view" id="resultView">
+          <div class="result-badge">✓</div>
+
+          <div class="kicker">Confirmação concluída</div>
+          <h2>Resposta registrada com sucesso</h2>
+
+          <p class="result-text">
+            Obrigado pela confirmação. Raul e Milena já foram avisados e estão aguardando você neste sábado.
+          </p>
+
+          <div class="receipt">
+            <div class="receipt-row">
+              <span>Evento</span>
+              <span>Encontro em casa</span>
+            </div>
+
+            <div class="receipt-row">
+              <span>Local</span>
+              <span>Casa de Raul e Milena</span>
+            </div>
+
+            <div class="receipt-row">
+              <span>Status</span>
+              <span>Presença confirmada</span>
+            </div>
+
+            <div class="receipt-highlight">
+              Também agradecemos por informar que irá levar
+              <strong>2 garrafas de vinho e 12 cervejas Heineken</strong>.
+              A contribuição já foi registrada para os organizadores da casa. 😂
+            </div>
+          </div>
+
+          <div class="joke">
+            Registro definitivo. Alterações somente mediante negociação com Raul e Milena. 🍷🍺
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const intro = document.getElementById("intro");
+      const loadingView = document.getElementById("loadingView");
+      const resultView = document.getElementById("resultView");
+      const btnYes = document.getElementById("btnYes");
+      const btnNo = document.getElementById("btnNo");
+      const progressBar = document.getElementById("progressBar");
+      const progressNumber = document.getElementById("progressNumber");
+      const progressLabel = document.getElementById("progressLabel");
+      const loadingCopy = document.getElementById("loadingCopy");
+
+      let started = false;
+
+      const steps = [
+        { value: 16, label: "Validando", text: "Validando sua escolha..." },
+        { value: 34, label: "Registrando", text: "Registrando sua resposta..." },
+        { value: 57, label: "Organizando", text: "Atualizando a lista de convidados..." },
+        { value: 76, label: "Notificando", text: "Notificando Raul e Milena..." },
+        { value: 91, label: "Conferindo", text: "Conferindo a contribuição informada..." },
+        { value: 100, label: "Concluído", text: "Finalizando seu comprovante..." }
+      ];
+
+      function iniciarResposta() {
+        if (started) return;
+        started = true;
+
+        intro.classList.add("hidden");
+        loadingView.classList.add("active");
+
+        let index = 0;
+
+        function runStep() {
+          if (index >= steps.length) {
+            setTimeout(function () {
+              loadingView.classList.remove("active");
+              resultView.classList.add("active");
+              launchConfetti();
+            }, 650);
+            return;
+          }
+
+          const step = steps[index];
+          progressBar.style.width = step.value + "%";
+          progressNumber.textContent = step.value + "%";
+          progressLabel.textContent = step.label;
+          loadingCopy.textContent = step.text;
+
+          index++;
+          setTimeout(runStep, 720);
+        }
+
+        setTimeout(runStep, 250);
+      }
+
+      btnYes.addEventListener("click", iniciarResposta);
+      btnNo.addEventListener("click", iniciarResposta);
+
+      function launchConfetti() {
+        const colors = ["#f4c96b", "#4ee08a", "#66a8ff", "#ff6b76", "#ffffff"];
+        const total = 120;
+
+        for (let i = 0; i < total; i++) {
+          const piece = document.createElement("span");
+          piece.className = "confetti";
+
+          const size = 6 + Math.random() * 8;
+          piece.style.width = size + "px";
+          piece.style.height = (size * 1.5) + "px";
+          piece.style.left = Math.random() * 100 + "vw";
+          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.animationDuration = (2.7 + Math.random() * 2.8) + "s";
+          piece.style.animationDelay = (Math.random() * .8) + "s";
+          piece.style.setProperty("--drift", ((Math.random() - .5) * 180) + "px");
+
+          document.body.appendChild(piece);
+          setTimeout(() => piece.remove(), 6500);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
